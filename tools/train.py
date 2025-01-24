@@ -105,6 +105,10 @@ def parse_args():
 def main():
     args = parse_args()
 
+    print("########################")
+    print(torch.cuda.set_device(0))
+    print("########################")
+
     cfg = Config.fromfile(args.config)
     if args.cfg_options is not None:
         cfg.merge_from_dict(args.cfg_options)

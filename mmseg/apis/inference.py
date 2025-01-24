@@ -114,7 +114,10 @@ def show_result_pyplot(model,
                        fig_size=(15, 10),
                        opacity=0.5,
                        title='',
-                       block=True):
+                       block=True,
+                       save_dir=None,
+                       display=False,
+                       seg_only=False):
     """Visualize the segmentation results on the image.
 
     Args:
@@ -135,17 +138,17 @@ def show_result_pyplot(model,
     """
     if hasattr(model, 'module'):
         model = model.module
-    # img = model.show_result(img, result, palette=palette, show=False, seg_only=seg_only, out_file=save_dir)
-    # plt.figure(figsize=fig_size)
-    # plt.imshow(mmcv.bgr2rgb(img))
-    # # if save_dir:
-    # #     plt.savefig(save_dir)
-    # if display:
-    #     plt.show()
-    img = model.show_result(
-        img, result, palette=palette, show=False, opacity=opacity)
+    img = model.show_result(img, result, palette=palette, show=False, out_file=save_dir)
     plt.figure(figsize=fig_size)
     plt.imshow(mmcv.bgr2rgb(img))
-    plt.title(title)
-    plt.tight_layout()
-    plt.show(block=block)
+    if save_dir:
+        plt.savefig(save_dir)
+    if display:
+        plt.show()
+    # img = model.show_result(
+    #     img, result, palette=palette, show=False, opacity=opacity)
+    # plt.figure(figsize=fig_size)
+    # plt.imshow(mmcv.bgr2rgb(img))
+    # plt.title(title)
+    # plt.tight_layout()
+    # plt.show(block=block)
